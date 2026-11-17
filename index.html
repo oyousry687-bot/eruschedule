@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة التسجيل الأكاديمي الذكية - الجامعة المصرية الروسية</title>
+    <style>
+        :root {
+            --eru-primary: #003366; /* كحلي فاخر */
+            --eru-secondary: #8b0000; /* أحمر جامعة */
+        }
+
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* جعل اللوجو يغطي الصفحة كلها كعلامة مائية شفافة وفخمة */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            background-image: url('download.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            opacity: 0.04; /* شفافية هادئة جداً لا تشتت العين */
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .main-card {
+            position: relative;
+            z-index: 1; /* لضمان ظهور الفورم فوق العلامة المائية بوضوح */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 45px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 51, 102, 0.12);
+            max-width: 580px;
+            width: 100%;
+            border-top: 6px solid var(--eru-primary);
+            border-bottom: 6px solid var(--eru-secondary);
+            text-align: center;
+            backdrop-filter: blur(8px);
+            box-sizing: border-box;
+            margin: 20px;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: auto;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
+        }
+
+        h2 {
+            color: var(--eru-primary);
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 30px;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group {
+            text-align: right;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+            background: #fafbfc;
+            color: #333;
+        }
+
+        input:focus {
+            border-color: var(--eru-primary);
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 51, 102, 0.15);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--eru-primary) 0%, #004080 100%);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0, 51, 102, 0.25);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #002244 0%, var(--eru-primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 51, 102, 0.35);
+        }
+
+        .footer-info {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid #edf2f7;
+            padding-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="logo-container">
+        <!-- لوجو الجامعة الرسمي في رأس الفورم -->
+        <img src="download.png" alt="ERU Logo" class="logo-img">
+    </div>
+    
+    <h2>نظام الاستعلام عن الجداول الدراسية</h2>
+    <div class="subtitle">الجامعة المصرية الروسية - كلية الهندسة</div>
+    
+    <!-- ضع رابط الـ Webhook أو Ngrok الخاص بك هنا -->
+    <form action="http://localhost:5678/webhook/5f972492-6307-4070-bdb8-621a3d97a615" method="POST">
+        
+        <div class="form-group">
+            <label>🎓 كود الطالب الجامعي:</label>
+            <input type="text" name="studentId" required placeholder="أدخل كود الطالب (مثال: 2023000)">
+        </div>
+
+        <div class="form-group">
+            <label>📚 أكواد المواد المطلوبة (مفصولة بفاصلة):</label>
+            <input type="text" name="courses" required placeholder="مثال: EE203, ME201, ME307, EE211">
+        </div>
+        
+        <button type="submit" class="submit-btn">عرض الجدول المقترح </button>
+    </form>
+
+    <div class="footer-info">
+        جميع الحقوق محفوظة © الجامعة المصرية الروسية 2026
+    </div>
+</div>
+
+</body>
+</html>
